@@ -1,0 +1,14 @@
+.button-container {
+    padding-left: 20vh;
+    padding-bottom: 1vh;
+    display: inline-block;
+    }
+    
+    .button {
+    background-color:blueviolet;
+    border: none;
+    padding: 2vh;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 2vh;
+    }
