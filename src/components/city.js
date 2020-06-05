@@ -1,46 +1,63 @@
 import React, { Component } from "react";
-import "./city.css"
 import axios from "axios";
+import "./city.css"
 class City extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            city: "TEXAS",
-            records: [] ,
-         }
+            zipcode: [],
+            cityName: null
+         };
+        this.handleChange = this.handleChange.bind(this);
     }
-    componentDidMount() {
+    //do axios request here
+    componentDidUpdate() {
         axios 
-        .get("http://ctp-zip-api.herokuapp.com/city/"+this.state.city.toUpperCase())
+        .get("http://ctp-zip-api.herokuapp.com/city/" + this.state.cityName.toUpperCase())
         .then((response) => {
-            
-            this.setState({records:response.data});
+            const data = response.data;
+            const newZipObj = {
+                listZips: data
+            };
+            this.setState({zipcode: newZipObj});
         })
         .catch((err) => console.log(err));
     }
+    //saves 
+    handleChange(e) {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+      }
+    //map function, checks if valid city
     render() {
-        return (
-            <>
-                <div>
-                    <h2> Please enter City Name:</h2>
-                    <input 
-                    className= "prompt-line"
-                    type="text"
-                    onChange= {(event) => this.setState({city: event.target.value})}
-                    placeholder={this.state.city}
-                    /> 
-                </div>
-
-                <button 
-                ClassName= "button-container" 
-                onClick={() => {
-                    this.componentDidMount();
-                }}
-                >
-                FIND 
-                </button>
+        let display;
+        if(!this.state.zipcode.listZips) {
+            display = <p>Loading...</p>;
+        } else {
+            console.log(this.state.cityName);
+            display = (
+                <>
+                <ul>
+                    {this.state.zipcode.listZips.map((zipcode) => <li key= { zipcode }> {zipcode} </li>)}
+                
+                </ul>
                 </>
-        );
-            }
+            );
         }
-        export default City;
+        //display
+        return(
+        <div>
+            <p> Enter city to retrieve zipcodes: </p>
+            <input
+                type= "text"
+                name = "cityName"
+                defaultValue = {this.state.cityName}
+                onChange={(e) => this.handleChange(e)} >
+            </input>
+            <div className ="city">{display}</div>
+        </div> 
+        )     
+    }
+}
+export default City;
