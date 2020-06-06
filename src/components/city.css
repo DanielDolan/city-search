@@ -3,5 +3,11 @@
     margin-left: auto;
 }
 ul {
-    list-style-position: inside;
+    display: inline-block;
+    width: 100px;
+    height: auto;
+    padding: 5px;
+}
+.class{
+    display: flex;
 }

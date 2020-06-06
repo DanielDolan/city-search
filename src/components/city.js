@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
 import "./city.css"
 class City extends Component {
     constructor(props) {
@@ -35,27 +36,46 @@ class City extends Component {
         if(!this.state.zipcode.listZips) {
             display = <p>Loading...</p>;
         } else {
-            console.log(this.state.cityName);
             display = (
                 <>
-                <ul>
-                    {this.state.zipcode.listZips.map((zipcode) => <li key= { zipcode }> {zipcode} </li>)}
+                <div class ="container float-none">
+                    <div class ="row">
+                        <div class="col-sm-3">
+                            <ul>
+                                {this.state.zipcode.listZips.map((zipcode) => <li key= { zipcode }> {zipcode} </li>)}
                 
-                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 </>
             );
         }
         //display
         return(
         <div>
-            <p> Enter city to retrieve zipcodes: </p>
+            <div class="form-group mx-sm-3 mb-2 pt-5">
+            <h4> Enter a city to retrieve zipcodes: </h4>
             <input
                 type= "text"
                 name = "cityName"
                 defaultValue = {this.state.cityName}
                 onChange={(e) => this.handleChange(e)} >
             </input>
-            <div className ="city">{display}</div>
+            <div class="container float-none">
+                <div class="row">
+                    <div class="col-sm-3">
+                    <div class ="city">{display}</div>
+                    </div>
+                </div>
+                
+            </div>
+
+            </div>
+            
+            
         </div> 
         )     
     }

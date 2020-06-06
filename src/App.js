@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import City from "./components/city";
 import './App.css';
+
 class App extends Component {
   render() {
     return (

@@ -1,7 +1,8 @@
 .App {
   justify-content: center;
+  
 }
 *{
-background-color: aqua;
+background-color: rgb(200, 214, 243);
 text-align: center;
 }
